@@ -1,7 +1,7 @@
 # arvore-de-jogos
 Trabalho de estrutura de dados, orientado por Otávio Alcântara.
 
-- Uma implementação de árvore de jogos para o Jogo da Velha, com interface gráfica. Foi utilizado Nextjs no frontend e Spring no backend, e implantando na Vercel.
+- Uma implementação de árvore de jogos para o Jogo da Velha, com interface gráfica. Foi utilizado Nextjs para criar a aplicação e implantar na Vercel.
 
 ## links
 
@@ -26,7 +26,7 @@ class Node:
         self.board = [0, 0, 0, 0, 0, 0, 0, 0, 0]
         self.next = next
         self.son = son
-        self.turn = 0
+        self.turn = turn
 ```
 
 - Haverá uma função "buildTree", que gera uma função de árvore de jogo a partir de uma posição e um inteiro que indica a profundidade da árvore. Essa função deverá ter um método "expand", que retornará todas as jogadas possíveis a partir da posição entregue.
