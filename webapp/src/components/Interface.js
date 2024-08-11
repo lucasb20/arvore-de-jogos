@@ -1,22 +1,58 @@
-import { useRef, useEffect } from 'react';
+import { useRef, useEffect, useState } from 'react';
 
 const CanvasComponent = () => {
-  const canvasRef = useRef(null);
+  const canvasRef = useRef(null)
+  const ctxRef = useRef(null)
+  const [game, setGame] = useState([0, 1, 2, 0, 1, 2, 0, 1, 2])
+  const cellSize = 100
+
+  const drawGame = () => {
+    const ctx = ctxRef.current
+    ctx.clearRect(0, 0, canvasRef.current.width, canvasRef.current.height)
+
+    for (let i = 1; i < 3; i++) {
+      ctx.beginPath()
+      ctx.moveTo(i * cellSize, 0)
+      ctx.lineTo(i * cellSize, 3 * cellSize)
+      ctx.stroke()
+
+      ctx.beginPath()
+      ctx.moveTo(0, i * cellSize)
+      ctx.lineTo(3 * cellSize, i * cellSize)
+      ctx.stroke()
+    }
+
+    for (let i = 0; i < game.length; i++) {
+      const posx = (i % 3) * cellSize + cellSize / 2
+      const posy = Math.floor(i / 3) * cellSize + cellSize / 2
+      const player = game[i]
+
+      if (player === 1) {
+        ctx.beginPath()
+        ctx.moveTo(posx - 30, posy - 30)
+        ctx.lineTo(posx + 30, posy + 30)
+        ctx.moveTo(posx + 30, posy - 30)
+        ctx.lineTo(posx - 30, posy + 30)
+        ctx.stroke()
+      } else if (player === 2) {
+        ctx.beginPath()
+        ctx.arc(posx, posy, 30, 0, 2 * Math.PI)
+        ctx.stroke()
+      }
+    }
+  }
 
   useEffect(() => {
-    const canvas = canvasRef.current;
-    const context = canvas.getContext('2d');
-
-    context.fillStyle = 'red';
-    context.fillRect(10, 10, 150, 100);
-  }, []);
+    ctxRef.current = canvasRef.current.getContext('2d')
+    drawGame()
+  }, [game]);
 
   return (
     <canvas 
       id='canvas'
       ref={canvasRef} 
-      width={500} 
-      height={500} 
+      width={300} 
+      height={300} 
       style={{ border: '1px solid black' }}
     />
   );
