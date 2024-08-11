@@ -3,8 +3,21 @@ import { useRef, useEffect, useState } from 'react';
 const CanvasComponent = () => {
   const canvasRef = useRef(null)
   const ctxRef = useRef(null)
-  const [game, setGame] = useState([0, 1, 2, 0, 1, 2, 0, 1, 2])
+  const [game, setGame] = useState([0, 0, 0, 0, 0, 0, 0, 0, 0])
+  const [player, setPlayer] = useState(1)
   const cellSize = 100
+
+  const handlerClick = (ev) => {
+    const x = ev.clientX - canvasRef.current.offsetLeft
+    const y = ev.clientY - canvasRef.current.offsetTop
+    const pos = Math.floor(x / 100) + Math.floor(y / 100)*3
+    if(game[pos] == 0){
+      const newGame = [...game]
+      newGame[pos] = player
+      setGame(newGame)
+      drawGame()
+    }
+  }
 
   const drawGame = () => {
     const ctx = ctxRef.current
@@ -54,6 +67,7 @@ const CanvasComponent = () => {
       width={300} 
       height={300} 
       style={{ border: '1px solid black' }}
+      onClick={handlerClick}
     />
   );
 };
