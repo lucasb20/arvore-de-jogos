@@ -56,7 +56,9 @@ export default function GameComponent(){
   }
 
   const newMatch = () => {
-    setGame([0, 0, 0, 0, 0, 0, 0, 0, 0])
+    const newGame = [0, 0, 0, 0, 0, 0, 0, 0, 0]
+    if(player === 1)newGame[Math.floor(Math.random()*9)] = 1
+    setGame(newGame)
     setPlayer(player === 1?2:1)
   }
 
