@@ -1,6 +1,6 @@
 "use client"
 
-import CanvasComponent from "@/components/Interface";
+import GameComponent from "@/components/Interface";
 
 export default function Home() {
   return (
@@ -10,7 +10,7 @@ export default function Home() {
       </header>
 
       <main>
-          <CanvasComponent/>
+          <GameComponent/>
       </main>
     </>
   );

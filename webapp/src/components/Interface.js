@@ -1,6 +1,6 @@
 import { useRef, useEffect, useState } from 'react';
 
-const CanvasComponent = () => {
+export default function GameComponent(){
   const canvasRef = useRef(null)
   const ctxRef = useRef(null)
   const [game, setGame] = useState([0, 0, 0, 0, 0, 0, 0, 0, 0])
@@ -58,7 +58,7 @@ const CanvasComponent = () => {
   useEffect(() => {
     ctxRef.current = canvasRef.current.getContext('2d')
     drawGame()
-  }, [game]);
+  }, [game])
 
   return (
     <canvas 
@@ -69,7 +69,5 @@ const CanvasComponent = () => {
       style={{ border: '1px solid black' }}
       onClick={handlerClick}
     />
-  );
-};
-
-export default CanvasComponent;
+  )
+}
