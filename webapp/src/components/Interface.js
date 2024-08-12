@@ -55,19 +55,27 @@ export default function GameComponent(){
     }
   }
 
+  const newMatch = () => {
+    setGame([0, 0, 0, 0, 0, 0, 0, 0, 0])
+    setPlayer(player === 1?2:1)
+  }
+
   useEffect(() => {
     ctxRef.current = canvasRef.current.getContext('2d')
     drawGame()
   }, [game])
 
   return (
-    <canvas 
-      id='canvas'
-      ref={canvasRef} 
-      width={300} 
-      height={300} 
-      style={{ border: '1px solid black' }}
-      onClick={handlerClick}
-    />
+    <>
+      <canvas 
+        id='canvas'
+        ref={canvasRef} 
+        width={300} 
+        height={300} 
+        style={{ border: '1px solid black' }}
+        onClick={handlerClick}
+      />
+      <button onClick={newMatch}>Nova Partida</button>
+    </>
   )
 }

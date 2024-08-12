@@ -17,3 +17,9 @@ canvas#canvas{
     margin: auto;
     border: 1px solid black;
 }
+
+button{
+    display: block;
+    margin: 20px auto;
+    padding: 10px;
+}
