@@ -1,4 +1,17 @@
 
+class Game {
+    constructor(board = [0, 0, 0, 0, 0, 0, 0, 0, 0]){
+        this.board = board
+        this.next = null
+        let turn = 0
+        board.forEach((value) => {
+            if(value ==! 0)
+                turn++
+        })
+        this.turn = turn % 2 === 0 ? '+' : '-'
+    }
+}
+
 // Mock
 export function bestBranch(arr){
     let player = 0
