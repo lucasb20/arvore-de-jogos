@@ -10,6 +10,18 @@ class Game {
         })
         this.turn = turn % 2 === 0 ? '+' : '-'
     }
+
+    expand(){
+        const children = []
+        this.board.forEach((value, index) => {
+            if(value === 0){
+                const son = [...this.board]
+                son[index] = this.turn === '+' ? 1 : 2
+                children.push(new Game(son))
+            }
+        })
+        return children
+    }
 }
 
 // Mock
