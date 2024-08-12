@@ -1,4 +1,5 @@
 import { useRef, useEffect, useState } from 'react';
+import { bestBranch } from '@/components/algs';
 
 export default function GameComponent(){
   const canvasRef = useRef(null)
@@ -14,8 +15,7 @@ export default function GameComponent(){
     if(game[pos] == 0){
       const newGame = [...game]
       newGame[pos] = player
-      setGame(newGame)
-      drawGame()
+      setGame(bestBranch(newGame))
     }
   }
 
