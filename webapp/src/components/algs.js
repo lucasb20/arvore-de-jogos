@@ -1,8 +1,9 @@
+import { States, utility } from "@/components/base"
 
 class Game {
     constructor(board = [0, 0, 0, 0, 0, 0, 0, 0, 0]){
         this.board = board
-        this.next = null
+        this.val = 0
         let turn = 0
         board.forEach((value) => {
             if(value ==! 0)
@@ -12,6 +13,10 @@ class Game {
     }
 
     expand(){
+        const posUtility = utility(this.board)
+        if(posUtility !== States.runningMatch){
+            return []
+        }
         const children = []
         this.board.forEach((value, index) => {
             if(value === 0){
@@ -45,3 +50,5 @@ export function bestBranch(arr){
     newArr[pos] = player % 2 === 0 ? 1 : 2
     return newArr
 }
+
+function buildTree(board){}

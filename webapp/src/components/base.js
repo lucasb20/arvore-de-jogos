@@ -2,14 +2,14 @@ const Cells = {
     empty: 0,
 }
 
-const States = {
+export const States = {
     draw: 0,
     runningMatch: -1,
     x: 1,
     o: 2
 }
 
-function utility(state){
+export function utility(state){
     for(let i = 0; i < 7; i+=3){
         if((state[i] == state[i+1]) && (state[i+1] == state[i+2]) && (state[i] != Cells.empty)){
             return state[i]
