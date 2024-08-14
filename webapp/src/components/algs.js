@@ -10,12 +10,17 @@ class Game {
                 turn++
         })
         this.turn = turn % 2 === 0 ? '+' : '-'
+        this.children = null
     }
 
     expand(){
+        if(this.children !== null){
+            return this.children
+        }
         const state = checkState(this.board)
         if(state !== States.runningMatch){
-            return []
+            this.children = []
+            return this.children
         }
         const children = []
         this.board.forEach((value, index) => {
@@ -25,6 +30,7 @@ class Game {
                 children.push(new Game(son))
             }
         })
+        this.children = children
         return children
     }
 }
@@ -51,4 +57,13 @@ export function bestBranch(arr){
     return newArr
 }
 
-function buildTree(board){}
+function buildTree(board){
+    const game = new Game(board)
+    const stack = game.expand()
+    while (true) {
+        if(stack.length === 0) break
+        const g = stack.pop()
+        stack.concat(g.expand())
+    }
+    return game
+}
