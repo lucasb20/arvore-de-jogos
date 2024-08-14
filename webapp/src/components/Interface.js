@@ -1,5 +1,5 @@
 import { useRef, useEffect, useState } from 'react';
-import { bestBranch } from '@/components/algs';
+import { checkState, States } from '@/components/base';
 
 export default function GameComponent(){
   const canvasRef = useRef(null)
@@ -12,10 +12,11 @@ export default function GameComponent(){
     const x = ev.clientX - canvasRef.current.offsetLeft
     const y = ev.clientY - canvasRef.current.offsetTop
     const pos = Math.floor(x / 100) + Math.floor(y / 100)*3
-    if(game[pos] == 0){
+    if(game[pos] === 0 && checkState(game) === States.runningMatch){
       const newGame = [...game]
       newGame[pos] = player
-      setGame(bestBranch(newGame))
+      setGame(newGame)
+      setPlayer(player === 1 ? 2 : 1)
     }
   }
 
@@ -57,9 +58,7 @@ export default function GameComponent(){
 
   const newMatch = () => {
     const newGame = [0, 0, 0, 0, 0, 0, 0, 0, 0]
-    if(player === 1)newGame[Math.floor(Math.random()*9)] = 1
     setGame(newGame)
-    setPlayer(player === 1?2:1)
   }
 
   useEffect(() => {
