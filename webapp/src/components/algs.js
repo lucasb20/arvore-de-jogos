@@ -13,26 +13,34 @@ class Game {
         this.children = null
     }
 
-    expand(){
-        if(this.children !== null){
-            return this.children
-        }
-        const state = checkState(this.board)
-        if(state !== States.runningMatch){
-            this.children = []
-            return this.children
-        }
-        const children = []
-        this.board.forEach((value, index) => {
-            if(value === 0){
-                const son = [...this.board]
-                son[index] = this.turn === '+' ? 1 : 2
-                children.push(new Game(son))
-            }
-        })
+    setChildren(children){
         this.children = children
-        return children
     }
+
+    setVal(val){
+        this.val = val
+    }
+}
+
+function expand(game){
+    if(game.children !== null){
+        return game.children
+    }
+    const state = checkState(game.board)
+    if(state !== States.runningMatch){
+        game.setChildren([])
+        return []
+    }
+    const children = []
+    game.board.forEach((value, index) => {
+        if(value === 0){
+            const son = [...game.board]
+            son[index] = game.turn === '+' ? 1 : 2
+            children.push(new Game(son))
+        }
+    })
+    game.setChildren(children)
+    return children
 }
 
 function bestBranch(game){
@@ -62,11 +70,15 @@ function bestBranch(game){
 
 function buildTree(board){
     const game = new Game(board)
-    const stack = game.expand()
-    while (true) {
-        if(stack.length === 0) break
-        const g = stack.pop()
-        stack.concat(g.expand())
+    let array = expand(game)
+    let index = 0
+    let limit = array.length - 1
+    while (index <= limit) {
+        console.log(`loading ${index}/${limit}`)
+        const children = expand(array[index])
+        index++
+        limit += children.length
+        array = [...array, ...children]
     }
     return game
 }
