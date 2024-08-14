@@ -1,4 +1,4 @@
-import { States, utility } from "@/components/base"
+import { States, utility, checkState } from "@/components/base"
 
 class Game {
     constructor(board = [0, 0, 0, 0, 0, 0, 0, 0, 0]){
@@ -13,8 +13,8 @@ class Game {
     }
 
     expand(){
-        const posUtility = utility(this.board)
-        if(posUtility !== States.runningMatch){
+        const state = checkState(this.board)
+        if(state !== States.runningMatch){
             return []
         }
         const children = []
