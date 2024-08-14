@@ -29,7 +29,7 @@ export function checkState(state){
     
     for(let i = 0; i < 9; i++){
         if(state[i] == Cells.empty){
-            return Cells.runningMatch
+            return States.runningMatch
         }
     }
     return States.draw
