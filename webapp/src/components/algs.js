@@ -35,26 +35,29 @@ class Game {
     }
 }
 
-// Mock
-export function bestBranch(arr){
-    let player = 0
-    const plays = []
-    arr.forEach((value, index) => {
-        if(value !== 0){
-            player++
-        }
-        else{
-            plays.push(index)
+function bestBranch(game){
+    if(game.children.length === 0){
+        game.val = utility(game.board)
+        return null
+    }
+    let bestVal = game.turn === '+' ? 2 : -2
+    let bestChild = null
+    game.board.forEach((son)=>{
+        bestBranch(son)
+        if(game.turn === '+'){
+            if(son.val < bestVal){
+                bestVal = son.val
+                bestChild = son
+            }
+        }else{
+            if(son.val > bestVal){
+                bestVal = son.val
+                bestChild = son
+            }
         }
     })
-    console.log(plays)
-    if(plays.length === 0){
-        return arr
-    }
-    const pos = plays[Math.floor(Math.random()*plays.length)]
-    const newArr = [...arr]
-    newArr[pos] = player % 2 === 0 ? 1 : 2
-    return newArr
+    game.val = bestVal
+    return bestChild
 }
 
 function buildTree(board){
