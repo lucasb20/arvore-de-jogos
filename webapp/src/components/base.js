@@ -9,7 +9,7 @@ export const States = {
     o: 2
 }
 
-export function utility(state){
+export function checkState(state){
     for(let i = 0; i < 7; i+=3){
         if((state[i] == state[i+1]) && (state[i+1] == state[i+2]) && (state[i] != Cells.empty)){
             return state[i]
@@ -26,12 +26,24 @@ export function utility(state){
     if((state[2] == state[4]) && (state[4] == state[6]) && (state[2] != Cells.empty)){
             return state[2]
         }
-
+    
     for(let i = 0; i < 9; i++){
         if(state[i] == Cells.empty){
             return Cells.runningMatch
         }
     }
-
     return States.draw
+}
+
+export function utility(state){
+    const res = checkState(state)
+    if(res === States.x){
+        return 1
+    }
+    else if (res === States.o){
+        return -1
+    }
+    else{
+        return 0
+    }
 }
