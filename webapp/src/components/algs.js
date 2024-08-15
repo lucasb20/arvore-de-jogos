@@ -6,7 +6,7 @@ class Game {
         this.val = 0
         let turn = 0
         board.forEach((value) => {
-            if(value ==! 0)
+            if(value !== 0)
                 turn++
         })
         this.turn = turn % 2 === 0 ? '+' : '-'
@@ -45,12 +45,12 @@ function expand(game){
 
 function bestBranch(game){
     if(game.children.length === 0){
-        game.val = utility(game.board)
+        game.setVal(utility(game.board))
         return null
     }
     let bestVal = game.turn === '+' ? 2 : -2
     let bestChild = null
-    game.board.forEach((son)=>{
+    game.children.forEach((son)=>{
         bestBranch(son)
         if(game.turn === '+'){
             if(son.val < bestVal){
@@ -64,7 +64,7 @@ function bestBranch(game){
             }
         }
     })
-    game.val = bestVal
+    game.setVal(bestVal)
     return bestChild
 }
 
@@ -81,4 +81,8 @@ function buildTree(board){
         array = [...array, ...children]
     }
     return game
+}
+
+export function buildAndPlay(board){
+    return bestBranch(buildTree(board))
 }
