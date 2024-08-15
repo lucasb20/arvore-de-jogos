@@ -48,17 +48,17 @@ function bestBranch(game){
         game.setVal(utility(game.board))
         return null
     }
-    let bestVal = game.turn === '+' ? 2 : -2
+    let bestVal = game.turn === '+' ? -2 : 2
     let bestChild = null
     game.children.forEach((son)=>{
         bestBranch(son)
         if(game.turn === '+'){
-            if(son.val < bestVal){
+            if(son.val > bestVal){
                 bestVal = son.val
                 bestChild = son
             }
         }else{
-            if(son.val > bestVal){
+            if(son.val < bestVal){
                 bestVal = son.val
                 bestChild = son
             }
