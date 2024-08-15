@@ -83,5 +83,7 @@ function buildTree(board){
 }
 
 export function buildAndPlay(board){
-    return bestBranch(buildTree(board))
+    const root = buildTree(board)
+    bestBranch(root)
+    return root
 }
