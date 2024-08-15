@@ -1,7 +1,7 @@
 import { States, utility, checkState } from "@/components/base"
 
 class Game {
-    constructor(board = [0, 0, 0, 0, 0, 0, 0, 0, 0]){
+    constructor(board = [0, 0, 0, 0, 0, 0, 0, 0, 0], depth = 0){
         this.board = board
         this.val = 0
         let turn = 0
@@ -11,6 +11,7 @@ class Game {
         })
         this.turn = turn % 2 === 0 ? '+' : '-'
         this.children = null
+        this.depth = depth
     }
 
     setChildren(children){
@@ -36,7 +37,7 @@ function expand(game){
         if(value === 0){
             const son = [...game.board]
             son[index] = game.turn === '+' ? 1 : 2
-            children.push(new Game(son))
+            children.push(new Game(son, game.depth + 1))
         }
     })
     game.setChildren(children)
