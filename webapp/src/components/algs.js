@@ -58,11 +58,9 @@ function bestBranch(game){
                 bestVal = son.val
                 bestChild = son
             }
-        }else{
-            if(son.val < bestVal){
-                bestVal = son.val
-                bestChild = son
-            }
+        }else if (son.val < bestVal){
+            bestVal = son.val
+            bestChild = son
         }
     })
     game.setVal(bestVal)
