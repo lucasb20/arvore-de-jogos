@@ -1,5 +1,6 @@
 import { useRef, useEffect, useState } from 'react';
 import { checkState, States } from '@/components/base';
+import { buildAndPlay } from '@/components/algs';
 
 export default function GameComponent(){
   const canvasRef = useRef(null)
@@ -62,6 +63,10 @@ export default function GameComponent(){
     setPlayer(1)
   }
 
+  const impressTree = () => {
+    console.log(buildAndPlay(game))
+  }
+
   useEffect(() => {
     ctxRef.current = canvasRef.current.getContext('2d')
     drawGame()
@@ -78,6 +83,7 @@ export default function GameComponent(){
         onClick={handlerClick}
       />
       <button onClick={newMatch}>Nova Partida</button>
+      <button onClick={impressTree}>Calcular Árvore</button>
     </>
   )
 }
