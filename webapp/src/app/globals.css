@@ -30,3 +30,17 @@ button{
     justify-content: space-evenly;
     padding: 10px;
 }
+
+.gameAndStats {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 10px;
+}
+
+.gameAndStats ul{
+    display: flex;
+    flex-direction: row;
+    gap: 10px;
+    list-style: none;
+}

@@ -10,6 +10,7 @@ export default function GameComponent(){
   const [player, setPlayer] = useState(1)
   const cellSize = 100
   const [path, setPath] = useState([])
+  const [gameValue, setGameValue] = useState(0)
 
   const handlerClick = (ev) => {
     const x = ev.clientX - canvasRef.current.offsetLeft
@@ -76,6 +77,7 @@ export default function GameComponent(){
       index++
     }
     setPath(newPath)
+    setGameValue(root.val)
   }
 
   useEffect(() => {
@@ -85,14 +87,21 @@ export default function GameComponent(){
 
   return (
     <>
-      <canvas 
-        id='canvas'
-        ref={canvasRef} 
-        width={300} 
-        height={300} 
-        style={{ border: '1px solid black' }}
-        onClick={handlerClick}
-      />
+      <div className='gameAndStats'>
+        <ul>
+          <li>value: {gameValue}</li>
+          <li>turn: {player === 1 ? '+' : '-'}</li>
+          <li>depth: 0</li>
+        </ul>
+        <canvas 
+          id='canvas'
+          ref={canvasRef} 
+          width={300} 
+          height={300} 
+          style={{ border: '1px solid black' }}
+          onClick={handlerClick}
+        />
+      </div>
       <button onClick={newMatch}>Nova Partida</button>
       <button onClick={impressTree}>Calcular Árvore</button>
       {
