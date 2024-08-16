@@ -49,14 +49,21 @@ export default function SubTree({game}){
   
     return (
       <>
-        <canvas 
-          className='subarvore'
-          ref={canvasRef}
-          width={90}
-          height={90}
-          style={{ border: '1px solid black' }}
-          onClick={handlerClick}
-        />
+        <div className='gameAndStats'>
+          <ul>
+            <li>value: {game.val}</li>
+            <li>turn: {game.turn}</li>
+            <li>depth: {game.depth}</li>
+          </ul>
+          <canvas 
+            className='subarvore'
+            ref={canvasRef}
+            width={90}
+            height={90}
+            style={{ border: '1px solid black' }}
+            onClick={handlerClick}
+          />
+        </div>
       </>
     )
   }
