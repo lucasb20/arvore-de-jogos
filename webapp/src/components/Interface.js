@@ -67,10 +67,7 @@ export default function GameComponent(){
 
   const impressTree = () => {
     const root = buildTree(game)
-    const newPath = []
-    const initial = bestBranch(root)
-    if(initial === null)return
-    newPath.push(initial)
+    const newPath = [root]
     let index = 0
     while (true) {
       const nodeAux = bestBranch(newPath[index])
@@ -98,15 +95,20 @@ export default function GameComponent(){
       />
       <button onClick={newMatch}>Nova Partida</button>
       <button onClick={impressTree}>Calcular Árvore</button>
-      <div className='childrenWrapper'>
       {
-        nodes.map((value) => {
-          return (
-            <SubTree game={value} key={value.board.join('')}/>
-          )
-        })
+        path.map((node) => {
+          return(
+              <div className='childrenWrapper'>{
+                node.children.map(son => {
+                  return(
+                      <SubTree game={son} key={son.board.join('')}/>
+                    )
+                  })
+                }
+              </div>
+            )
+          })
       }
-      </div>
     </>
   )
 }
