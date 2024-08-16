@@ -44,7 +44,7 @@ function expand(game){
     return children
 }
 
-function bestBranch(game){
+export function bestBranch(game){
     if(game.children.length === 0){
         game.setVal(utility(game.board))
         return null
@@ -67,7 +67,7 @@ function bestBranch(game){
     return bestChild
 }
 
-function buildTree(board){
+export function buildTree(board){
     const game = new Game(board)
     let array = expand(game)
     let index = 0
@@ -80,10 +80,4 @@ function buildTree(board){
         array = [...array, ...children]
     }
     return game
-}
-
-export function buildAndPlay(board){
-    const root = buildTree(board)
-    bestBranch(root)
-    return root
 }

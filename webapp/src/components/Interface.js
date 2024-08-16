@@ -1,6 +1,6 @@
 import { useRef, useEffect, useState } from 'react';
 import { checkState, States } from '@/components/base';
-import { buildAndPlay } from '@/components/algs';
+import { buildTree, bestBranch } from '@/components/algs';
 import SubTree from '@/components/SubTree';
 
 export default function GameComponent(){
@@ -10,6 +10,7 @@ export default function GameComponent(){
   const [player, setPlayer] = useState(1)
   const cellSize = 100
   const [nodes, setNodes] = useState([])
+  const [path, setPath] = useState([])
 
   const handlerClick = (ev) => {
     const x = ev.clientX - canvasRef.current.offsetLeft
@@ -66,7 +67,7 @@ export default function GameComponent(){
   }
 
   const impressTree = () => {
-    const node = buildAndPlay(game)
+    const node = buildTree(game)
     setNodes(node.children)
   }
 
