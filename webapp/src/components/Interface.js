@@ -63,6 +63,7 @@ export default function GameComponent(){
   const newMatch = () => {
     const newGame = [0, 0, 0, 0, 0, 0, 0, 0, 0]
     setGame(newGame)
+    setPath([])
     setPlayer(1)
   }
 
