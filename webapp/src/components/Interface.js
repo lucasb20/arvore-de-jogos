@@ -80,6 +80,10 @@ export default function GameComponent(){
     setGameValue(root.val)
   }
 
+  const checkIsInPath = (game) => {
+    return path.some((value) => game.board.join('') === value.board.join(''))
+  }
+
   useEffect(() => {
     ctxRef.current = canvasRef.current.getContext('2d')
     drawGame()
@@ -105,12 +109,12 @@ export default function GameComponent(){
       <button onClick={newMatch}>Nova Partida</button>
       <button onClick={impressTree}>Calcular Árvore</button>
       {
-        path.map((node) => {
-          return(
-              <div className='childrenWrapper'>{
-                node.children.map(son => {
-                  return(
-                      <SubTree game={son} key={son.board.join('')}/>
+        path.map((node, index) => {
+          return (
+              <div className='childrenWrapper' key={index}>{
+                node.children.map((son) => {
+                  return (
+                      <SubTree game={son} key={son.board.join('')} isInPath={checkIsInPath(son)} />
                     )
                   })
                 }

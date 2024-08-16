@@ -1,6 +1,6 @@
 import { useEffect, useRef } from "react"
 
-export default function SubTree({game}){
+export default function SubTree({game, isInPath}){
     const canvasRef = useRef(null)
     const ctxRef = useRef(null)
     const cellSize = 30
@@ -60,7 +60,7 @@ export default function SubTree({game}){
             ref={canvasRef}
             width={90}
             height={90}
-            style={{ border: '1px solid black' }}
+            style={{ border: isInPath ? '1px solid black' : 'none' }}
             onClick={handlerClick}
           />
         </div>
