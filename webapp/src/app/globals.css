@@ -23,3 +23,8 @@ button{
     margin: 20px auto;
     padding: 10px;
 }
+
+.childrenWrapper{
+    display: flex;
+    justify-content: space-around;
+}

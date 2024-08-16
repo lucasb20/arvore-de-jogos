@@ -1,8 +1,9 @@
+import { useEffect, useRef } from "react"
 
 export default function SubTree({game}){
     const canvasRef = useRef(null)
     const ctxRef = useRef(null)
-    const cellSize = 100
+    const cellSize = 30
 
     const handlerClick = () => {}
 
@@ -24,18 +25,18 @@ export default function SubTree({game}){
       for (let i = 0; i < game.board.length; i++) {
         const posx = (i % 3) * cellSize + cellSize / 2
         const posy = Math.floor(i / 3) * cellSize + cellSize / 2
-        const player = game[i]
+        const player = game.board[i]
   
         if (player === 1) {
           ctx.beginPath()
-          ctx.moveTo(posx - 30, posy - 30)
-          ctx.lineTo(posx + 30, posy + 30)
-          ctx.moveTo(posx + 30, posy - 30)
-          ctx.lineTo(posx - 30, posy + 30)
+          ctx.moveTo(posx - 10, posy - 10)
+          ctx.lineTo(posx + 10, posy + 10)
+          ctx.moveTo(posx + 10, posy - 10)
+          ctx.lineTo(posx - 10, posy + 10)
           ctx.stroke()
         } else if (player === 2) {
           ctx.beginPath()
-          ctx.arc(posx, posy, 30, 0, 2 * Math.PI)
+          ctx.arc(posx, posy, 10, 0, 2 * Math.PI)
           ctx.stroke()
         }
       }
@@ -51,8 +52,8 @@ export default function SubTree({game}){
         <canvas 
           className='subarvore'
           ref={canvasRef}
-          width={300}
-          height={300}
+          width={90}
+          height={90}
           style={{ border: '1px solid black' }}
           onClick={handlerClick}
         />

@@ -1,6 +1,7 @@
 import { useRef, useEffect, useState } from 'react';
 import { checkState, States } from '@/components/base';
 import { buildAndPlay } from '@/components/algs';
+import SubTree from '@/components/SubTree';
 
 export default function GameComponent(){
   const canvasRef = useRef(null)
@@ -8,6 +9,7 @@ export default function GameComponent(){
   const [game, setGame] = useState([0, 0, 0, 0, 0, 0, 0, 0, 0])
   const [player, setPlayer] = useState(1)
   const cellSize = 100
+  const [nodes, setNodes] = useState([])
 
   const handlerClick = (ev) => {
     const x = ev.clientX - canvasRef.current.offsetLeft
@@ -64,7 +66,8 @@ export default function GameComponent(){
   }
 
   const impressTree = () => {
-    console.log(buildAndPlay(game))
+    const node = buildAndPlay(game)
+    setNodes(node.children)
   }
 
   useEffect(() => {
@@ -84,6 +87,15 @@ export default function GameComponent(){
       />
       <button onClick={newMatch}>Nova Partida</button>
       <button onClick={impressTree}>Calcular Árvore</button>
+      <div className='childrenWrapper'>
+      {
+        nodes.map((value) => {
+          return (
+            <SubTree game={value} key={value.board.join('')}/>
+          )
+        })
+      }
+      </div>
     </>
   )
 }
