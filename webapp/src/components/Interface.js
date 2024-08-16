@@ -9,7 +9,6 @@ export default function GameComponent(){
   const [game, setGame] = useState([0, 0, 0, 0, 0, 0, 0, 0, 0])
   const [player, setPlayer] = useState(1)
   const cellSize = 100
-  const [nodes, setNodes] = useState([])
   const [path, setPath] = useState([])
 
   const handlerClick = (ev) => {
@@ -67,8 +66,19 @@ export default function GameComponent(){
   }
 
   const impressTree = () => {
-    const node = buildTree(game)
-    setNodes(node.children)
+    const root = buildTree(game)
+    const newPath = []
+    const initial = bestBranch(root)
+    if(initial === null)return
+    newPath.push(initial)
+    let index = 0
+    while (true) {
+      const nodeAux = bestBranch(newPath[index])
+      if(nodeAux === null)break
+      newPath.push(nodeAux)
+      index++
+    }
+    setPath(newPath)
   }
 
   useEffect(() => {
