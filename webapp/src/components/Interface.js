@@ -65,6 +65,7 @@ export default function GameComponent(){
     setGame(newGame)
     setPath([])
     setPlayer(1)
+    setGameValue(0)
   }
 
   const impressTree = () => {
